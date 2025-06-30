@@ -1,16 +1,57 @@
 ---
+// This page will be revalidated at most once every 60 seconds.
+export const revalidate = 60;
 
+const currentTime = new Date().toLocaleString();
 ---
 
+<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Astro ISR Demo</title>
+		<style>
+			body {
+				font-family: sans-serif;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+				background-color: #1a1a1a;
+				color: #f0f0f0;
+				text-align: center;
+				padding: 20px;
+			}
+			h1 {
+				color: #007bff;
+				margin-bottom: 20px;
+			}
+			p {
+				font-size: 1.2em;
+				margin-bottom: 10px;
+			}
+			.timestamp {
+				font-size: 1.5em;
+				font-weight: bold;
+				color: #28a745;
+			}
+			.note {
+				font-size: 0.9em;
+				color: #cccccc;
+				margin-top: 30px;
+			}
+		</style>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<h1>Astro ISR Demo</h1>
+		<p>This page demonstrates Incremental Static Regeneration (ISR) with Astro.</p>
+		<p>Current Server Time (revalidates every 60 seconds):</p>
+		<p class="timestamp">{currentTime}</p>
+		<p class="note">
+			The timestamp above is generated on the server. If you refresh the page within 60 seconds, you will see the cached version.
+			After 60 seconds, the next refresh will trigger a revalidation in the background, and subsequent requests will show the updated time.
+		</p>
 	</body>
 </html>
